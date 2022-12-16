@@ -1,6 +1,6 @@
 FROM ubuntu as rusty-base
 RUN apt update -yq && \
-    apt install git binaryen cmake pkg-config libssl-dev libclang-dev curl -yq
+    apt install git binaryen cmake pkg-config libssl-dev libclang-dev libprotobuf-dev protobuf-compiler curl -yq
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
