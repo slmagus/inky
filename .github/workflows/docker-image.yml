@@ -28,7 +28,7 @@ jobs:
         #logout: # optional, default is true
     
     - name: Build contractbuilding image
-      run: docker build --target contractbuilding --tag contractbuilding:$(date +%s) -f Dockerfile
+      run: docker build --target contractbuilding --tag contractbuilding:$(date +%s) -f Dockerfile .
     - name: Push contractbuilding image
       run: docker push contractbuilding:$(date +%s)
     - name: Build contractui image
