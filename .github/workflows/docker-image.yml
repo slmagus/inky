@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  logon:
     runs-on: ubuntu-latest
     steps:
     - name: Docker Login
@@ -26,9 +26,11 @@ jobs:
         ecr: false # optional, default is auto
     # Log out from the Docker registry at the end of a job
         #logout: # optional, default is true
+  build:
+    runs-on: ubuntu-latest
+    steps:
     - name: list
       run: cd .. && ls -lah && pwd
-    
     - name: Build contractbuilding image
       run: docker build --target contractbuilding --tag contractbuilding:$(date +%s) -f Dockerfile .
     - name: Push contractbuilding image
@@ -41,4 +43,4 @@ jobs:
       run: docker build --target substratenode --tag substratenode:$(date +%s) .
     - name: Push substatenode image
       run: docker push substratenode:$(date +%s)
-  
+
