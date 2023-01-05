@@ -26,21 +26,15 @@ jobs:
         logout: # optional, default is true
     
     - name: Build contractbuilding image
-      uses: actions/checkout@v3
       run: docker build . --target contractbuilding --tag contractbuilding:$(date +%s)
     - name: Push contractbuilding image
-      uses: actions/checkout@v3
       run: docker push contractbuilding:$(date +%s)
     - name: Build contractui image
-      uses: actions/checkout@v3
       run: docker build . --target contractui --tag contractui:$(date +%s)
     - name: Push contractui image
-      uses: actions/checkout@v3
       run: docker push contractui:$(date +%s)
     - name: Build substatenode image
-      uses: actions/checkout@v3
       run: docker build . --target substratenode --tag substratenode:$(date +%s)
     - name: Push substatenode image
-      uses: actions/checkout@v3
       run: docker push substratenode:$(date +%s)
   
