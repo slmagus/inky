@@ -33,15 +33,14 @@ jobs:
     - name: list
       run: cd .. && ls -lah && pwd
     - name: Build contractbuilding image
-      run: docker build --target contractbuilding --tag contractbuilding:$(date +%s) -f Dockerfile .
+      run: docker build --target contractbuilding --tag slmagus/contractbuilding:latest .
     - name: Push contractbuilding image
-      run: docker push contractbuilding:$(date +%s)
+      run: docker push slmagus/ontractbuilding:latest
     - name: Build contractui image
-      run: docker build --target contractui --tag contractui:$(date +%s) .
+      run: docker build --target contractui --tag slmagus/contractui:latest .
     - name: Push contractui image
-      run: docker push contractui:$(date +%s)
+      run: docker push slmagus/contractui:latest
     - name: Build substatenode image
-      run: docker build --target substratenode --tag substratenode:$(date +%s) .
+      run: docker build --target substratenode --tag slmagus/substratenode:latest .
     - name: Push substatenode image
-      run: docker push substratenode:$(date +%s)
-
+      run: docker push slmagus/substratenode:latest
