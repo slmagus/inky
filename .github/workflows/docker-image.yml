@@ -29,6 +29,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: list
       run: cd .. && ls -lah && pwd
     - name: Build contractbuilding image
