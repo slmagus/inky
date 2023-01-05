@@ -25,7 +25,7 @@ jobs:
     # Specifies whether the given registry is ECR (auto, true or false)
         ecr: false # optional, default is auto
     # Log out from the Docker registry at the end of a job
-        logout: true # optional, default is true
+        logout: false # optional, default is true
   build:
     runs-on: ubuntu-latest
     steps:
