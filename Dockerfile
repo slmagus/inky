@@ -3,6 +3,18 @@ RUN apt update -yq && \
     apt install curl -yq && \
     apt install git binaryen g++ build-essential make llvm libudev-dev pkg-config libssl-dev libclang-dev libprotobuf-dev protobuf-compiler -yq
 
+FROM ubuntu-base as contractui
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt -y install nodejs 
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt update -yq && apt install yarn -yq
+RUN git clone https://github.com/paritytech/contracts-ui.git
+WORKDIR /contracts-ui
+RUN yarn
+EXPOSE 8081
+ENTRYPOINT [ "yarn", "start", "--host" ]
+
 FROM ubuntu-base as rust-base
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
@@ -31,18 +43,6 @@ RUN cargo install cargo-contract --locked
 RUN rustup component add rustfmt
 RUN rustup component add rust-src --toolchain nightly
 RUN rustup target add wasm32-unknown-unknown --toolchain nightly
-
-FROM ubuntu-base as contractui
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt -y install nodejs 
-RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt update -yq && apt install yarn -yq
-RUN git clone https://github.com/paritytech/contracts-ui.git
-WORKDIR /contracts-ui
-RUN yarn
-EXPOSE 8081
-ENTRYPOINT [ "yarn", "start", "--host" ]
 
 FROM rust-base as substratenode
 RUN rustup default stable
