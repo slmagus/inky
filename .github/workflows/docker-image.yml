@@ -28,7 +28,7 @@ jobs:
         #logout: # optional, default is true
     - name: list
       run: ls -lah && pwd
-    - name: Push contractbuilding image
+    
     - name: Build contractbuilding image
       run: docker build --target contractbuilding --tag contractbuilding:$(date +%s) -f Dockerfile .
     - name: Push contractbuilding image
