@@ -27,7 +27,7 @@ jobs:
     # Log out from the Docker registry at the end of a job
         #logout: # optional, default is true
     - name: list
-      run: ls -lah && pwd
+      run: cd .. && ls -lah && pwd
     
     - name: Build contractbuilding image
       run: docker build --target contractbuilding --tag contractbuilding:$(date +%s) -f Dockerfile .
